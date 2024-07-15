@@ -14,13 +14,18 @@ class MyServer(BaseHTTPRequestHandler):
 
     filename = "web_1.html"
 
+    def get_html(self, filename):
+        with open(filename, encoding='utf-8') as file:
+            result = file.read()
+        return result
+
     def do_GET(self):
         """ Метод для обработки входящих GET-запросов """
         self.send_response(200)  # Отправка кода ответа
         self.send_header("Content-type",
-                         "application/json")  # Отправка типа данных, который будет передаваться
+                         "text/html")  # Отправка типа данных, который будет передаваться
         self.end_headers()  # Завершение формирования заголовков ответа
-        self.wfile.write(bytes("{'message': 'OK'}", "utf-8"))  # Тело ответа
+        self.wfile.write(bytes(self.get_html(self.filename), "utf-8"))  # Тело ответа
 
 
 if __name__ == "__main__":
