@@ -12,6 +12,8 @@ class MyServer(BaseHTTPRequestHandler):
         обработку входящих запросов от клиентов
     """
 
+    filename = "web_1.html"
+
     def do_GET(self):
         """ Метод для обработки входящих GET-запросов """
         self.send_response(200)  # Отправка кода ответа
